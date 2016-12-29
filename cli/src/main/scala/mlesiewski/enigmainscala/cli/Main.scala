@@ -1,4 +1,4 @@
-package mlesiewski.enigmainscala
+package mlesiewski.enigmainscala.cli
 
 object Main {
 
