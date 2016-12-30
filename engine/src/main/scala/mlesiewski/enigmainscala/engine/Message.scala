@@ -14,11 +14,11 @@ object Message {
   def fromTextForEncoding(setting: (Char, Char, Char), textForEncoding: String): Message =
     new Message(setting, toPrettyText(textForEncoding), textForEncoding)
 
-  private def toPrettyText(textForEncoding: String): String = {
-    
+  private[engine] def toPrettyText(textForEncoding: String): String = {
+    return null
   }
 
-  private def toTextForEncoding(prettyText: String): String = {
-
+  private[engine] def toTextForEncoding(prettyText: String): String = {
+    return null
   }
 }
