@@ -1,10 +1,10 @@
 package mlesiewski.enigmainscala.engine
 
 class Message (
-  val setting: (Char, Char, Char),
-  val prettyText: String,
-  val textForEncoding: String
-  ) {}
+  setting: (Char, Char, Char),
+  prettyText: String,
+  textForEncoding: String
+)
 
 object Message {
 

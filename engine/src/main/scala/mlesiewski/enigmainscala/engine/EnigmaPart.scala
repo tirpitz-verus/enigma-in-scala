@@ -2,7 +2,7 @@ package mlesiewski.enigmainscala.engine
 
 trait EnigmaPart {
 
-  def getName: String
+  val partName: String
 
   def getShortDescription: String
 

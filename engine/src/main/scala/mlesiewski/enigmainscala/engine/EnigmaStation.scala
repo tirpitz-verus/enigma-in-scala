@@ -1,14 +1,16 @@
 package mlesiewski.enigmainscala.engine
 
-trait EnigmaStation {
-
-  def getEngine: Engine
-
-  def setDailyKey(dailyKey: DailyKey): EnigmaStation
-
-  def getDailyKey: DailyKey
+class EnigmaStation (
+  dailyKey: DailyKey,
+  engine: Engine
+) {
 
   def encode(message: Message): String
 
   def decode(encoded: String): Message
+}
+
+object EnigmaStation {
+
+  def get()
 }

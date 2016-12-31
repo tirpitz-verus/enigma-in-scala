@@ -2,7 +2,7 @@ package mlesiewski.enigmainscala.engine
 
 trait Keyboard extends EnigmaPart {
 
-  def typeLetter(letter: Char): Engine
+  val typedLetter: Char
 
-  def getLetterTyped: Char
+  def typeLetter(letter: Char): Engine
 }
