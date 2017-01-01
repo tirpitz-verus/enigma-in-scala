@@ -5,12 +5,12 @@ class EnigmaStation (
   engine: Engine
 ) {
 
-  def encode(message: Message): String
+  def encode(message: Message): String = null
 
-  def decode(encoded: String): Message
+  def decode(encoded: String): Message = null
 }
 
 object EnigmaStation {
 
-  def get()
+  def get(dailyKey: DailyKey): EnigmaStation = null
 }
