@@ -77,10 +77,9 @@ class MessageSpec extends FunSpec {
   }
 
   private def nonLetters = {
-    (1 to 255).
-      filter (i => i < 'A'.toInt && i > 'Z'.toInt).
-      filter (i => i < 'a'.toInt && i > 'z'.toInt).
-      map (i => i.toChar).
-      map (i => i.toString)
+    1 to 255 filter byLetterRange map toLetterString
+
+    def byLetterRange(i: Int) = (i < 'A'.toInt && i > 'Z'.toInt) || (i < 'a'.toInt && i > 'z'.toInt)
+    def toLetterString(i: Int) = i.toChar.toString
   }
 }
