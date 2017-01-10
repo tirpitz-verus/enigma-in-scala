@@ -1,24 +1,38 @@
 package mlesiewski.enigmainscala.engine
 
+/** represents a message to be encrypted with an Enigma machine */
 class Message (
-  setting: (Char, Char, Char),
-  prettyText: String,
-  textForEncoding: String
-)
+                /** a setting for this message */
+                val setting: (Char, Char, Char),
+
+                /** a "pretty text" message - with space characters and numbers */
+                val prettyText: String,
+
+                /** a text in Enigma format - without spaces and numbers */
+                val inEnigmaFormat: String
+              )
 
 object Message {
 
-  def fromPrettyText(setting: (Char, Char, Char), prettyText: String): Message =
-    new Message(setting, prettyText, toTextForEncoding(prettyText))
+  /** creates a message from a pretty text
+    *
+    * @param prettyText a pretty text string
+    */
+  def fromPrettyText (setting: (Char, Char, Char), prettyText: String): Message =
+    new Message (setting, prettyText, toEnigmaFormat (prettyText))
 
-  def fromTextForEncoding(setting: (Char, Char, Char), textForEncoding: String): Message =
-    new Message(setting, toPrettyText(textForEncoding), textForEncoding)
-
-  private[engine] def toPrettyText(textForEncoding: String): String = {
+  private[engine] def toEnigmaFormat (prettyText: String): String = {
     return null
   }
 
-  private[engine] def toTextForEncoding(prettyText: String): String = {
+  /** creates a message from a text in an Enigma format
+    *
+    * @param inEnigmaFormat text in an Enigma format
+    */
+  def fromEnigmaFormat (setting: (Char, Char, Char), inEnigmaFormat: String): Message =
+    new Message (setting, toPrettyText (inEnigmaFormat), inEnigmaFormat)
+
+  private[engine] def toPrettyText (inEnigmaFormat: String): String = {
     return null
   }
 }

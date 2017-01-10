@@ -2,12 +2,12 @@ package mlesiewski.enigmainscala.engine
 
 /** Describes a group of parts of the 4-wheel (M4 or Navy) Enigma machine. Effectively this is the state before the next keystroke. */
 class Engine(
-  keyboard: Keyboard,
-  lampboard: Lampboard,
-  plugboard: Plugboard,
-  reflector: Reflector,
-  greekWheel: Option[Wheel],
-  leftWheel: Wheel,
-  middleWheel: Wheel,
-  rightWheel: Wheel
+  val keyboard: Keyboard,
+  val lampboard: Lampboard,
+  val plugboard: Plugboard,
+  val reflector: Reflector,
+  val greekWheel: Option[Rotor],
+  val leftWheel: Rotor,
+  val middleWheel: Rotor,
+  val rightWheel: Rotor
 )

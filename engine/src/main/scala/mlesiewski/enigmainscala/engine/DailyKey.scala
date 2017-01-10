@@ -2,17 +2,17 @@ package mlesiewski.enigmainscala.engine
 
 /** A set of starting settings for the parts of the Enigma. */
 class DailyKey(
-  reflectorName: Char,
-  greekWheel: Option[WheelKey],
-  leftWheel: WheelKey,
-  middleWheel: WheelKey,
-  rightWheel: WheelKey,
-  pluggedPairs: Seq[(Char, Char)]
+  val reflectorName: Char,
+  val greekWheel: Option[WheelKey],
+  val leftWheel: WheelKey,
+  val middleWheel: WheelKey,
+  val rightWheel: WheelKey,
+  val pluggedPairs: Seq[(Char, Char)]
 )
 
 /** A starting setting for a wheel. */
 class WheelKey (
-  name: Char,
-  setting: Char,
-  position: Char
+  val name: Char,
+  val setting: Char,
+  val position: Char
 )

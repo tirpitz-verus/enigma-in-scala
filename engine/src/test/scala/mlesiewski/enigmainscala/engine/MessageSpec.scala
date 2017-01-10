@@ -1,8 +1,8 @@
 package mlesiewski.enigmainscala.engine
 
+import org.scalatest.Inspectors._
+import org.scalatest.Matchers._
 import org.scalatest._
-import Matchers._
-import Inspectors._
 
 class MessageSpec extends FunSpec {
 
@@ -45,31 +45,31 @@ class MessageSpec extends FunSpec {
     describe("from 'pretty' to 'for encoding'") {
 
       it("should change space characters to X"){
-        Message.toTextForEncoding(" ") should be ("X")
-        Message.toTextForEncoding("  ") should be ("XX")
-        Message.toTextForEncoding("ASDFG HJKL") should be ("ASDFGXHJKL")
+        Message.toEnigmaFormat(" ") should be ("X")
+        Message.toEnigmaFormat("  ") should be ("XX")
+        Message.toEnigmaFormat("ASDFG HJKL") should be ("ASDFGXHJKL")
       }
 
       it("should change numbers to an Y number format"){
-        Message.toTextForEncoding("1234567890") should be ("YQWERTZUIOP")
-        Message.toTextForEncoding("B1WAZ") should be ("BYQWAZ")
+        Message.toEnigmaFormat("1234567890") should be ("YQWERTZUIOP")
+        Message.toEnigmaFormat("B1WAZ") should be ("BYQWAZ")
       }
 
       it("should throw IllegalArgumentException on non letters"){
         forAll (nonLetters) { character =>
           an [IllegalArgumentException] should be thrownBy {
-            Message.toTextForEncoding(character)
+            Message.toEnigmaFormat(character)
           }
         }
       }
 
       it("should leave normal letters intact"){
-        Message.toTextForEncoding("") should be ("")
-        Message.toTextForEncoding("QAZWSXEDC") should be ("QAZWSXEDC")
+        Message.toEnigmaFormat("") should be ("")
+        Message.toEnigmaFormat("QAZWSXEDC") should be ("QAZWSXEDC")
       }
 
       it("should output text in upper case") {
-        Message.toTextForEncoding("qWeRt") should be ("QWERT")
+        Message.toEnigmaFormat("qWeRt") should be ("QWERT")
       }
 
     }
