@@ -16,23 +16,21 @@ object Message {
 
   /** creates a message from a pretty text
     *
+    * @param setting a setting for this message
     * @param prettyText a pretty text string
     */
   def fromPrettyText (setting: (Char, Char, Char), prettyText: String): Message =
     new Message (setting, prettyText, toEnigmaFormat (prettyText))
 
-  private[engine] def toEnigmaFormat (prettyText: String): String = {
-    return null
-  }
+  private[engine] def toEnigmaFormat (prettyText: String): String = ???
 
   /** creates a message from a text in an Enigma format
     *
+    * @param setting a setting for this message
     * @param inEnigmaFormat text in an Enigma format
     */
   def fromEnigmaFormat (setting: (Char, Char, Char), inEnigmaFormat: String): Message =
     new Message (setting, toPrettyText (inEnigmaFormat), inEnigmaFormat)
 
-  private[engine] def toPrettyText (inEnigmaFormat: String): String = {
-    return null
-  }
+  private[engine] def toPrettyText (inEnigmaFormat: String): String = ???
 }

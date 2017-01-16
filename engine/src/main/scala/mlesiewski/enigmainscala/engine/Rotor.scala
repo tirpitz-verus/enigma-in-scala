@@ -6,22 +6,22 @@ package mlesiewski.enigmainscala.engine
   * @param position position of the rotor
   * @param wiring   wiring of the rotor
   */
-abstract class Rotor (
-                       /** position of the rotor - the one displayed by the Enigma panel above the lampboard */
-                       val position: Char,
+abstract class Rotor private[engine] (
+                                       /** position of the rotor - the one displayed by the Enigma panel above the lampboard */
+                                       val position: Char,
 
-                       /** wiring of the rotor that maps letter to one another */
-                       val wiring: Wiring,
+                                       /** wiring of the rotor that maps letter to one another */
+                                       val wiring: Wiring,
 
-                       /** notch or notches of the rotor  */
-                       val notches: Seq[Char]
-                     ) extends EnigmaPart {
+                                       /** notch or notches of the rotor  */
+                                       val notches: Seq[Char]
+                                     ) extends EnigmaPart {
 
   /** encodes a single letter
     *
     * @param letter a letter to encode
     * @return an encoded letter
-    **/
+    * */
   def encode (letter: Char): Char = wiring encode letter
 
   /** steps the Rotor to the next position
@@ -38,12 +38,25 @@ abstract class Rotor (
 /** a companion object for obtaining Rotor instances */
 object Rotor {
 
+  /**
+    * @param wheelKey a key for the wheel
+    * @return an instance of a Rotor
+    */
+  def get (wheelKey: Option[WheelKey]): Option[Rotor] = wheelKey.map (wheelKey => get (wheelKey.rotorName, wheelKey.position, wheelKey.offset))
+
+  /**
+    * @param wheelKey a key for the wheel
+    * @return an instance of a Rotor
+    */
+  def get (wheelKey: WheelKey): Rotor = get (wheelKey.rotorName, wheelKey.position, wheelKey.offset)
+
+
   /** returns an instance of Rotor
     *
     * @param rotorName name of the rotor to produce
     * @param position  starting position of the rotor
     * @param offset    offset of the rotor
-    * @return instance of a Rotor
+    * @return an instance of a Rotor
     */
   def get (rotorName: String, position: Char, offset: Int): Rotor = rotorName match {
     case "I" => new Rotor_I (position, offset)
