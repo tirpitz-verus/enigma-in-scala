@@ -4,4 +4,6 @@ package mlesiewski.enigmainscala.engine
 trait Lampboard {
 
   val highlightedLetter: Option[Char]
+
+  def highlight (letter: Char): Lampboard
 }
