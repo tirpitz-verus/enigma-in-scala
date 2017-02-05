@@ -6,6 +6,7 @@ import org.scalatest._
 
 class WiringSpec extends FunSpec {
 
+  // Rotor I
   val testBaseSetting = "EKMFLGDQVZNTOWYHXUSPAIBRCJ"
 
   describe ("with base setting of '" + testBaseSetting + "'") {

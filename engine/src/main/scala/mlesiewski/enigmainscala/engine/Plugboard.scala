@@ -7,4 +7,6 @@ trait Plugboard extends EnigmaPart {
   def plugPair(pair: (Char, Char)): Engine
 
   def unplugPair(pair: (Char, Char)): Engine
+
+  def encode (key: Char): Char
 }
