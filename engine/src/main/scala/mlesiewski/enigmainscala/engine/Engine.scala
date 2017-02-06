@@ -58,15 +58,15 @@ class Engine private[engine] (
     * @return encoded character
     */
   private def encode (letter: Char): Char = {
-    var letter: Char = plugboard.encode (letter)
-    letter = rightWheel.encode (letter)
-    letter = middleWheel.encode (letter)
-    letter = leftWheel.encode (letter)
-    letter = greekWheel.map (r => r.encode (letter)).getOrElse (letter)
-    letter = reflector.encode (letter)
-    letter = greekWheel.map (r => r.encode (letter)).getOrElse (letter)
-    letter = leftWheel.encode (letter)
-    letter = middleWheel.encode (letter)
-    rightWheel.encode (letter)
+    var encoded = plugboard.encode (letter)
+    encoded = rightWheel.encode (encoded)
+    encoded = middleWheel.encode (encoded)
+    encoded = leftWheel.encode (encoded)
+    encoded = greekWheel.map (r => r.encode (encoded)).getOrElse (encoded)
+    encoded = reflector.encode (encoded)
+    encoded = greekWheel.map (r => r.encode (encoded)).getOrElse (encoded)
+    encoded = leftWheel.encode (encoded)
+    encoded = middleWheel.encode (encoded)
+    rightWheel.encode (encoded)
   }
 }
