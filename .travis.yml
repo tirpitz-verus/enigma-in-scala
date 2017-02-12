@@ -1,0 +1,13 @@
+sudo: false
+language: scala
+jdk:
+  - oraclejdk8
+scala:
+   - 2.12.1
+cache:
+  directories:
+    - $HOME/.ivy2/cache
+    - $HOME/.sbt/boot/
+notifications:
+  email:
+    on_success: never
