@@ -10,12 +10,6 @@ class MessageSpec extends FunSpec {
 
     describe("from 'for encoding' to 'pretty'") {
 
-      it("should change X to space characters"){
-        Message.toPrettyText("X") should be (" ")
-        Message.toPrettyText("XX") should be ("  ")
-        Message.toPrettyText("ASDFGXHJKL") should be ("ASDFG HJKL")
-      }
-
       it("should change Y and following number letters (QWERTZUIOP) to a number"){
         Message.toPrettyText("Y") should be ("Y")
         Message.toPrettyText("YC") should be ("YC")
@@ -44,12 +38,6 @@ class MessageSpec extends FunSpec {
 
     describe("from 'pretty' to 'for encoding'") {
 
-      it("should change space characters to X"){
-        Message.toEnigmaFormat(" ") should be ("X")
-        Message.toEnigmaFormat("  ") should be ("XX")
-        Message.toEnigmaFormat("ASDFG HJKL") should be ("ASDFGXHJKL")
-      }
-
       it("should change numbers to an Y number format"){
         Message.toEnigmaFormat("1234567890") should be ("YQWERTZUIOP")
         Message.toEnigmaFormat("B1WAZ") should be ("BYQWAZ")
@@ -77,9 +65,9 @@ class MessageSpec extends FunSpec {
   }
 
   private def nonLetters = {
-    1 to 255 filter byLetterRange map toLetterString
-
     def byLetterRange(i: Int) = (i < 'A'.toInt && i > 'Z'.toInt) || (i < 'a'.toInt && i > 'z'.toInt)
     def toLetterString(i: Int) = i.toChar.toString
+
+    1 to 255 filter byLetterRange map toLetterString
   }
 }
