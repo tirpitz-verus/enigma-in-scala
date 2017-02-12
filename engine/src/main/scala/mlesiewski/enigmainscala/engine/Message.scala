@@ -53,13 +53,13 @@ object Message {
   private[engine] def toPrettyText (inEnigmaFormat: String): String = {
     implicit val allowed = letters
     val result = valid (inEnigmaFormat.toUpperCase)
-    s"Y[$lettersEncodingNumbers]+".r.replaceAllIn(result, m => letter2number(m.matched))
+    s"Y[$lettersEncodingNumbers]+".r.replaceAllIn (result, m => letter2number (m.matched))
   }
 
   // 48 is 0 in ASCII
   private def letter2number (letters: String): String = {
-    letters.substring(1).foldLeft (new mutable.StringBuilder ()) { (acc: mutable.StringBuilder, c: Char) =>
-      acc += (lettersEncodingNumbers.indexOf(c) + 48).toChar
+    letters.substring (1).foldLeft (new mutable.StringBuilder ()) { (acc: mutable.StringBuilder, c: Char) =>
+      acc += (lettersEncodingNumbers.indexOf (c) + 48).toChar
     }.toString
   }
 
