@@ -11,30 +11,22 @@ class WiringSpec extends FunSpec {
 
   describe ("with base setting of '" + testBaseSetting + "'") {
 
-    forAll (for (n <- 1 to 26) yield n) { offset =>
+    forAll (1 to 26) { offset =>
 
-      describe ("and offset of '" + offset + "'") {
+      describe("and offset of '" + offset + "'") {
 
-        val inputOutputPairsGenerator: Seq[(Char, Char)] = for (input <- 'A' to 'Z'; o <- testBaseSetting) yield {
-          val output = if (o > 'Z') {
-            o - 26
-          } else o
-          (input, output.toChar)
-        }
+        val wiring = new Wiring(testBaseSetting, offset)
 
-        forAll (inputOutputPairsGenerator) { pair =>
+        forAll(0 to 25) { charCode =>
 
-          it ("should encode '" + pair._1 + "' into '" + pair._2 + "'") {
-            val encoded = new Wiring (testBaseSetting, 0).encode (pair._1)
-            encoded should be (pair._2)
+          val letter = (65 + charCode).toChar
+          val expected = testBaseSetting.charAt((charCode + offset - 1) % 26)
+
+          it("should encode '" + letter + "' into  '" + expected + "'") {
+            wiring.encode(letter) should be (expected)
           }
-
         }
-
       }
-
     }
-
   }
-
 }

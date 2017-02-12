@@ -6,70 +6,58 @@ import org.scalatest._
 
 class MessageSpec extends FunSpec {
 
-  describe("converting text") {
+  describe ("converting text") {
 
-    describe("from 'for encoding' to 'pretty'") {
+    describe ("from 'for encoding' to 'pretty'") {
 
-      it("should change X to space characters"){
-        Message.toPrettyText("X") should be (" ")
-        Message.toPrettyText("XX") should be ("  ")
-        Message.toPrettyText("ASDFGXHJKL") should be ("ASDFG HJKL")
+      it ("should change Y and following number letters (QWERTZUIOP) to a number") {
+        Message.toPrettyText ("Y") should be ("Y")
+        Message.toPrettyText ("YC") should be ("YC")
+        Message.toPrettyText ("YQC") should be ("1C")
+        Message.toPrettyText ("YQWERTZUIOP") should be ("1234567890")
+        Message.toPrettyText ("YYQWERTZUIOP") should be ("Y1234567890")
       }
 
-      it("should change Y and following number letters (QWERTZUIOP) to a number"){
-        Message.toPrettyText("Y") should be ("Y")
-        Message.toPrettyText("YC") should be ("YC")
-        Message.toPrettyText("YQC") should be ("1C")
-        Message.toPrettyText("YQWERTZUIOP") should be ("1234567890")
-        Message.toPrettyText("YYQWERTZUIOP") should be ("Y1234567890")
-      }
-
-      it("should throw IllegalArgumentException on illegal characters"){
+      it ("should throw IllegalArgumentException on illegal characters") {
         forAll (nonLetters :+ " " :+ "1234567890") { character =>
           an [IllegalArgumentException] should be thrownBy {
-            Message.toPrettyText(character)
+            Message.toPrettyText (character)
           }
         }
       }
 
-      it("should leave normal letters intact"){
-        Message.toPrettyText("") should be ("")
-        Message.toPrettyText("QAZWSXEDC") should be ("QAZWSXEDC")
+      it ("should leave normal letters intact") {
+        Message.toPrettyText ("") should be ("")
+        Message.toPrettyText ("QAZWSXEDC") should be ("QAZWSXEDC")
       }
 
-      it("should output text in upper case") {
-        Message.toPrettyText("qWeRt") should be ("QWERT")
+      it ("should output text in upper case") {
+        Message.toPrettyText ("qWeRt") should be ("QWERT")
       }
     }
 
-    describe("from 'pretty' to 'for encoding'") {
+    describe ("from 'pretty' to 'for encoding'") {
 
-      it("should change space characters to X"){
-        Message.toEnigmaFormat(" ") should be ("X")
-        Message.toEnigmaFormat("  ") should be ("XX")
-        Message.toEnigmaFormat("ASDFG HJKL") should be ("ASDFGXHJKL")
+      it ("should change numbers to an Y number format") {
+        Message.toEnigmaFormat ("1234567890") should be ("YQWERTZUIOP")
+        Message.toEnigmaFormat ("B1WAZ") should be ("BYQWAZ")
       }
 
-      it("should change numbers to an Y number format"){
-        Message.toEnigmaFormat("1234567890") should be ("YQWERTZUIOP")
-        Message.toEnigmaFormat("B1WAZ") should be ("BYQWAZ")
-      }
-
-      it("should throw IllegalArgumentException on non letters"){
+      it ("should throw IllegalArgumentException on non letters") {
         forAll (nonLetters) { character =>
           an [IllegalArgumentException] should be thrownBy {
-            Message.toEnigmaFormat(character)
+            Message.toEnigmaFormat (character)
           }
         }
       }
 
-      it("should leave normal letters intact"){
-        Message.toEnigmaFormat("") should be ("")
-        Message.toEnigmaFormat("QAZWSXEDC") should be ("QAZWSXEDC")
+      it ("should leave normal letters intact") {
+        Message.toEnigmaFormat ("") should be ("")
+        Message.toEnigmaFormat ("QAZWSXEDC") should be ("QAZWSXEDC")
       }
 
-      it("should output text in upper case") {
-        Message.toEnigmaFormat("qWeRt") should be ("QWERT")
+      it ("should output text in upper case") {
+        Message.toEnigmaFormat ("qWeRt") should be ("QWERT")
       }
 
     }
@@ -77,9 +65,10 @@ class MessageSpec extends FunSpec {
   }
 
   private def nonLetters = {
-    1 to 255 filter byLetterRange map toLetterString
+    def byLetterRange (i: Int) = (i < 'A'.toInt && i > 'Z'.toInt) || (i < 'a'.toInt && i > 'z'.toInt)
 
-    def byLetterRange(i: Int) = (i < 'A'.toInt && i > 'Z'.toInt) || (i < 'a'.toInt && i > 'z'.toInt)
-    def toLetterString(i: Int) = i.toChar.toString
+    def toLetterString (i: Int) = i.toChar.toString
+
+    1 to 255 filter byLetterRange map toLetterString
   }
 }

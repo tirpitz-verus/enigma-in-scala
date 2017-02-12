@@ -75,19 +75,17 @@ object Rotor {
   }
 }
 
-/** represents the wiring of the rotor - maps one letter to another */
+/** represents the wiring of the rotor - maps one letter to another - keep in mind that the offset is 1 based (ie. offset of 1 means 'no change') */
 private[engine] class Wiring (
+                               /** letters that would be returned for a mapping of the rotor if in offset 1 */
+                               val baseSetting: String,
+
                                /** offset of the rotor */
                                val offset: Int
                              ) {
 
-  def encode (letter: Char): Char = ???
-
-  /**
-    * @param baseSetting letters that would be returned for a mapping of the rotor if in offset 1
-    * @param offset      offset of the rotor
-    */
-  def this (baseSetting: String, offset: Int) = this (offset)
+  /** letter - 'A' (baseSetting is 0-based) + offset -1 (offset i 1-based) */
+  def encode (letter: Char): Char = baseSetting.charAt ((letter.toInt - 66 + offset) % 26)
 }
 
 private[engine] class Rotor_I (
