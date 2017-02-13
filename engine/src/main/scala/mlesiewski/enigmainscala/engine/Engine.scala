@@ -47,8 +47,10 @@ class Engine private[engine] (
     */
   private[engine] def stepRotors () = {
     val newRightWheel = rightWheel.step
-    val newMiddleWheel = if (newRightWheel.notchEngaged) middleWheel.step else middleWheel
-    val newLeftWheel = if (newMiddleWheel.notchEngaged) leftWheel.step else leftWheel
+    var newMiddleWheel = if (rightWheel.notchEngaged) middleWheel.step else middleWheel
+    val newLeftWheel = if (middleWheel.notchEngaged) leftWheel.step else leftWheel
+    // the left wheel takes middle wheel with it (a.k.a. double stepping)
+    newMiddleWheel = if (middleWheel.notchEngaged) newMiddleWheel.step else newMiddleWheel
     new Engine (keyboard, lampboard, plugboard, reflector, greekWheel, newLeftWheel, newMiddleWheel, newRightWheel)
   }
 

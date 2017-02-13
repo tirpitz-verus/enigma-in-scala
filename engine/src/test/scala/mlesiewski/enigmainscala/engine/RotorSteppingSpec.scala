@@ -9,11 +9,11 @@ class RotorSteppingSpec extends FunSpec {
   describe ("rotors can step") {
 
     val reflectorName = "Reflector A"
-    val leftWheelKey = new WheelKey ("I", 'A', 0)
-    val rightWheelKey = new WheelKey ("III", 'U', 0)
+    val leftWheelKey = new WheelKey ("I", 0, 'A')
+    val rightWheelKey = new WheelKey ("III", 0, 'U')
 
     it ("in the so-called normal sequence") {
-      val middleWheelKey = new WheelKey ("II", 'A', 0)
+      val middleWheelKey = new WheelKey ("II", 0, 'A')
       val key = new DailyKey (reflectorName, Option.empty, leftWheelKey, middleWheelKey, rightWheelKey, Seq.empty)
       var engine = new Engine (key)
 
@@ -42,7 +42,7 @@ class RotorSteppingSpec extends FunSpec {
     }
 
     it ("in the so-called double step sequence") {
-      val middleWheelKey = new WheelKey ("II", 'D', 0)
+      val middleWheelKey = new WheelKey ("II", 0, 'D')
       val key = new DailyKey (reflectorName, Option.empty, leftWheelKey, middleWheelKey, rightWheelKey, Seq.empty)
       var engine = new Engine (key)
 
