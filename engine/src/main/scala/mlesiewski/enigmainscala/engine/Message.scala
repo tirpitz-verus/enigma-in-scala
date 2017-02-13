@@ -63,5 +63,9 @@ object Message {
     }.toString
   }
 
-  private def valid (input: String)(implicit allowed: String): String = input.map (c => if (!allowed.contains (c)) throw new IllegalArgumentException (s"illegal character found '$c'") else c).toString
+  private def valid (input: String)(implicit allowed: String): String = input.map (allowedOrException).toString
+
+  private def allowedOrException (c: Char)(implicit allowed: String) = { c: Char =>
+    if (!allowed.contains (c)) throw new IllegalArgumentException (s"illegal character found '$c'") else c
+  }
 }

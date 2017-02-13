@@ -15,13 +15,13 @@ class EnigmaStation private[engine] (
     * @param message a message do encode
     * @return a String representing an encoded message
     */
-  def encode (message: Message): String = null
+  def encode (message: Message): String = ???
 
   /**
     * @param encoded a String represented an encoded message
     * @return a decoded message
     */
-  def decode (encoded: String): Message = null
+  def decode (encoded: String): Message = ???
 }
 
 /**

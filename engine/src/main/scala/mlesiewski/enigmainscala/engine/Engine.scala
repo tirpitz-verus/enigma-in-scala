@@ -27,6 +27,24 @@ class Engine private[engine] (
     )
   }
 
+  private def this (
+                     keyboard: Keyboard,
+                     lampboard: Lampboard,
+                     plugboard: Plugboard,
+                     reflector: Reflector,
+                     engine: Engine) = {
+    this (
+      keyboard,
+      lampboard,
+      plugboard,
+      reflector,
+      engine.greekWheel,
+      engine.leftWheel,
+      engine.middleWheel,
+      engine.rightWheel
+    )
+  }
+
   /** Simulates when a key is pressed on the Enigma machine.
     * First rotors are stepped.
     * Then the character is feed through the rotors.
@@ -38,7 +56,8 @@ class Engine private[engine] (
   private[engine] def pressKey (key: Char): Engine = {
     val steppedEngine = stepRotors ()
     val letter = steppedEngine.encode (key)
-    new Engine (keyboard, lampboard.highlight (letter), plugboard, reflector, steppedEngine.greekWheel, steppedEngine.leftWheel, steppedEngine.middleWheel, steppedEngine.rightWheel)
+    val newLampboard = lampboard.highlight (letter)
+    new Engine (keyboard, newLampboard, plugboard, reflector, steppedEngine)
   }
 
   /** steps all the rotors

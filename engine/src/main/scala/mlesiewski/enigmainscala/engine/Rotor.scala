@@ -155,7 +155,8 @@ private[engine] class Rotor_VI (
 
   val rotorName: String = "VI"
   val partName: String = "Rotor VI"
-  val description: String = "It encrypts one letter (substitution cypher). Rotor VI was introduced in the M3 'Army' Enigma in 1939 and in the M4 'Navy' Enigma on February 1942."
+  val description: String = "It encrypts one letter (substitution cypher)." +
+    " Rotor VI was introduced in the M3 'Army' Enigma in 1939 and in the M4 'Navy' Enigma on February 1942."
 
   override def step: Rotor = new Rotor_VI (nextPosition, offset)
 }
@@ -167,7 +168,8 @@ private[engine] class Rotor_VII (
 
   val rotorName: String = "VII"
   val partName: String = "Rotor VII"
-  val description: String = "It encrypts one letter (substitution cypher). Rotor VII was introduced in the M3 'Army' Enigma in 1939 and in the M4 'Navy' Enigma on February 1942."
+  val description: String = "It encrypts one letter (substitution cypher)." +
+    " Rotor VII was introduced in the M3 'Army' Enigma in 1939 and in the M4 'Navy' Enigma on February 1942."
 
   override def step: Rotor = new Rotor_VII (nextPosition, offset)
 }
@@ -179,7 +181,8 @@ private[engine] class Rotor_VIII (
 
   val rotorName: String = "VIII"
   val partName: String = "Rotor VIII"
-  val description: String = "It encrypts one letter (substitution cypher). Rotor VIII was introduced in the M3 'Army' Enigma in 1939 and in the M4 'Navy' Enigma on February 1942."
+  val description: String = "It encrypts one letter (substitution cypher)." +
+    " Rotor VIII was introduced in the M3 'Army' Enigma in 1939 and in the M4 'Navy' Enigma on February 1942."
 
   override def step: Rotor = new Rotor_VIII (nextPosition, offset)
 }
