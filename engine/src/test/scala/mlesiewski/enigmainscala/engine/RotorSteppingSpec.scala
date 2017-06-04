@@ -8,7 +8,7 @@ class RotorSteppingSpec extends FunSpec {
   // based on https://en.wikipedia.org/wiki/Enigma_rotor_details#Turnover_notch_positions
   describe ("rotors can step") {
 
-    val reflectorName = "Reflector A"
+    val reflectorName = "A"
     val leftWheelKey = new WheelKey ("I", 0, 'A')
     val rightWheelKey = new WheelKey ("III", 0, 'U')
 
