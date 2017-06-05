@@ -5,15 +5,24 @@ import org.scalatest._
 
 class RotorSteppingSpec extends FunSpec {
 
+  it ("rotor offset affects letter encoding in the same way as ring setting") {
+    val letter = 'C'
+
+    val rotor_2_A = SteppingRotor.get(new WheelKey ("I", 2, 'A'))
+    val rotor_1_B = SteppingRotor.get(new WheelKey ("I", 1, 'B'))
+
+    rotor_1_B.encode(letter) should be (rotor_2_A.encode(letter))
+  }
+
   // based on https://en.wikipedia.org/wiki/Enigma_rotor_details#Turnover_notch_positions
   describe ("rotors can step") {
 
     val reflectorName = "A"
-    val leftWheelKey = new WheelKey ("I", 0, 'A')
-    val rightWheelKey = new WheelKey ("III", 0, 'U')
+    val leftWheelKey = new WheelKey ("I", 1, 'A')
+    val rightWheelKey = new WheelKey ("III", 1, 'U')
 
     it ("in the so-called normal sequence") {
-      val middleWheelKey = new WheelKey ("II", 0, 'A')
+      val middleWheelKey = new WheelKey ("II", 1, 'A')
       val key = new DailyKey (reflectorName, Option.empty, leftWheelKey, middleWheelKey, rightWheelKey, Seq.empty)
       var engine = new Engine (key)
 
@@ -42,7 +51,7 @@ class RotorSteppingSpec extends FunSpec {
     }
 
     it ("in the so-called double step sequence") {
-      val middleWheelKey = new WheelKey ("II", 0, 'D')
+      val middleWheelKey = new WheelKey ("II", 1, 'D')
       val key = new DailyKey (reflectorName, Option.empty, leftWheelKey, middleWheelKey, rightWheelKey, Seq.empty)
       var engine = new Engine (key)
 

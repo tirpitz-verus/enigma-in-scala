@@ -74,7 +74,7 @@ private[engine] object SteppingRotor {
 private[engine] class Rotor_I (
                                 rotorOffset: Char,
                                 ringSetting: Int
-                              ) extends SteppingRotor (rotorOffset, new Wiring ("EKMFLGDQVZNTOWYHXUSPAIBRCJ", ringSetting), Seq ('Q')) {
+                              ) extends SteppingRotor (rotorOffset, new Wiring ("EKMFLGDQVZNTOWYHXUSPAIBRCJ", ringSetting + rotorOffset), Seq ('Q')) {
 
   val rotorName: String = "I"
   val partName: String = "Rotor I"
@@ -86,7 +86,7 @@ private[engine] class Rotor_I (
 private[engine] class Rotor_II (
                                  rotorOffset: Char,
                                  ringSetting: Int
-                               ) extends SteppingRotor (rotorOffset, new Wiring ("AJDKSIRUXBLHWTMCQGZNPYFVOE", ringSetting), Seq ('E')) {
+                               ) extends SteppingRotor (rotorOffset, new Wiring ("AJDKSIRUXBLHWTMCQGZNPYFVOE", ringSetting + rotorOffset), Seq ('E')) {
 
   val rotorName: String = "II"
   val partName: String = "Rotor II"
@@ -98,7 +98,7 @@ private[engine] class Rotor_II (
 private[engine] class Rotor_III (
                                   rotorOffset: Char,
                                   ringSetting: Int
-                                ) extends SteppingRotor (rotorOffset, new Wiring ("BDFHJLCPRTXVZNYEIWGAKMUSQO", ringSetting), Seq ('V')) {
+                                ) extends SteppingRotor (rotorOffset, new Wiring ("BDFHJLCPRTXVZNYEIWGAKMUSQO", ringSetting + rotorOffset), Seq ('V')) {
 
   val rotorName: String = "III"
   val partName: String = "Rotor III"
@@ -110,7 +110,7 @@ private[engine] class Rotor_III (
 private[engine] class Rotor_IV (
                                  rotorOffset: Char,
                                  ringSetting: Int
-                               ) extends SteppingRotor (rotorOffset, new Wiring ("ESOVPZJAYQUIRHXLNFTGKDCMWB", ringSetting), Seq ('J')) {
+                               ) extends SteppingRotor (rotorOffset, new Wiring ("ESOVPZJAYQUIRHXLNFTGKDCMWB", ringSetting + rotorOffset), Seq ('J')) {
 
   val rotorName: String = "IV"
   val partName: String = "Rotor IV"
@@ -122,7 +122,7 @@ private[engine] class Rotor_IV (
 private[engine] class Rotor_V (
                                 rotorOffset: Char,
                                 ringSetting: Int
-                              ) extends SteppingRotor (rotorOffset, new Wiring ("VZBRGITYUPSDNHLXAWMJQOFECK", ringSetting), Seq ('Z')) {
+                              ) extends SteppingRotor (rotorOffset, new Wiring ("VZBRGITYUPSDNHLXAWMJQOFECK", ringSetting + rotorOffset), Seq ('Z')) {
 
   val rotorName: String = "V"
   val partName: String = "Rotor V"
@@ -134,7 +134,7 @@ private[engine] class Rotor_V (
 private[engine] class Rotor_VI (
                                  rotorOffset: Char,
                                  ringSetting: Int
-                               ) extends SteppingRotor (rotorOffset, new Wiring ("JPGVOUMFYQBENHZRDKASXLICTW", ringSetting), Seq ('Z', 'M')) {
+                               ) extends SteppingRotor (rotorOffset, new Wiring ("JPGVOUMFYQBENHZRDKASXLICTW", ringSetting + rotorOffset), Seq ('Z', 'M')) {
 
   val rotorName: String = "VI"
   val partName: String = "Rotor VI"
@@ -147,7 +147,7 @@ private[engine] class Rotor_VI (
 private[engine] class Rotor_VII (
                                   rotorOffset: Char,
                                   ringSetting: Int
-                                ) extends SteppingRotor (rotorOffset, new Wiring ("NZJHGRCXMYSWBOUFAIVLPEKQDT", ringSetting), Seq ('Z', 'M')) {
+                                ) extends SteppingRotor (rotorOffset, new Wiring ("NZJHGRCXMYSWBOUFAIVLPEKQDT", ringSetting + rotorOffset), Seq ('Z', 'M')) {
 
   val rotorName: String = "VII"
   val partName: String = "Rotor VII"
@@ -160,7 +160,7 @@ private[engine] class Rotor_VII (
 private[engine] class Rotor_VIII (
                                    rotorOffset: Char,
                                    ringSetting: Int
-                                 ) extends SteppingRotor (rotorOffset, new Wiring ("FKQHTLXOCBJSPDZRAMEWNIUYGV", ringSetting), Seq ('Z', 'M')) {
+                                 ) extends SteppingRotor (rotorOffset, new Wiring ("FKQHTLXOCBJSPDZRAMEWNIUYGV", ringSetting + rotorOffset), Seq ('Z', 'M')) {
 
   val rotorName: String = "VIII"
   val partName: String = "Rotor VIII"

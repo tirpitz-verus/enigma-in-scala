@@ -10,6 +10,9 @@ private[engine] class Wiring (
                                val ringSetting: Int = 1
                              ) {
 
+  require(baseSetting.length == 26, "base setting must a 26 letter long string")
+  require(ringSetting >= 1, "ring setting is 1-based")
+
   /** letter - 'A' (baseSetting is 0-based) + offset -1 (ring setting is 1-based)
     *
     * @return encoded character
