@@ -11,16 +11,16 @@ class WiringSpec extends FunSpec {
 
   describe ("with base setting of '" + testBaseSetting + "'") {
 
-    forAll (1 to 26) { offset =>
+    forAll (1 to 26) { ringSetting =>
 
-      describe("and offset of '" + offset + "'") {
+      describe("and ring setting of '" + ringSetting + "'") {
 
-        val wiring = new Wiring(testBaseSetting, offset)
+        val wiring = new Wiring(testBaseSetting, ringSetting)
 
         forAll(0 to 25) { charCode =>
 
           val letter = (65 + charCode).toChar
-          val expected = testBaseSetting.charAt((charCode + offset - 1) % 26)
+          val expected = testBaseSetting.charAt((charCode + ringSetting - 1) % 26)
 
           it("should encode '" + letter + "' into  '" + expected + "'") {
             wiring.encode(letter) should be (expected)

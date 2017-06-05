@@ -13,6 +13,6 @@ class DailyKey (
 /** A starting setting for a wheel. */
 class WheelKey (
                  val rotorName: String,
-                 val offset: Int,
+                 val ringSetting: Int,
                  val position: Char
                )
