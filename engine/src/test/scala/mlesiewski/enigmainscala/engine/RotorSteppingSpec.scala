@@ -18,27 +18,27 @@ class RotorSteppingSpec extends FunSpec {
       var engine = new Engine (key)
 
       // normal step of right rotor
-      engine.leftWheel.position should be (leftWheelKey.position)
-      engine.middleWheel.position should be (middleWheelKey.position)
-      engine.rightWheel.position should be (rightWheelKey.position)
+      engine.leftWheel.rotorOffset should be (leftWheelKey.rotorOffset)
+      engine.middleWheel.rotorOffset should be (middleWheelKey.rotorOffset)
+      engine.rightWheel.rotorOffset should be (rightWheelKey.rotorOffset)
 
       // right rotor (III) goes in V—notch position
       engine = engine.stepRotors ()
-      engine.leftWheel.position should be (leftWheelKey.position)
-      engine.middleWheel.position should be (middleWheelKey.position)
-      engine.rightWheel.position should be ('V')
+      engine.leftWheel.rotorOffset should be (leftWheelKey.rotorOffset)
+      engine.middleWheel.rotorOffset should be (middleWheelKey.rotorOffset)
+      engine.rightWheel.rotorOffset should be ('V')
 
       // right rotor takes middle rotor one step further
       engine = engine.stepRotors ()
-      engine.leftWheel.position should be (leftWheelKey.position)
-      engine.middleWheel.position should be ('B')
-      engine.rightWheel.position should be ('W')
+      engine.leftWheel.rotorOffset should be (leftWheelKey.rotorOffset)
+      engine.middleWheel.rotorOffset should be ('B')
+      engine.rightWheel.rotorOffset should be ('W')
 
       // normal step of right rotor
       engine = engine.stepRotors ()
-      engine.leftWheel.position should be (leftWheelKey.position)
-      engine.middleWheel.position should be ('B')
-      engine.rightWheel.position should be ('X')
+      engine.leftWheel.rotorOffset should be (leftWheelKey.rotorOffset)
+      engine.middleWheel.rotorOffset should be ('B')
+      engine.rightWheel.rotorOffset should be ('X')
     }
 
     it ("in the so-called double step sequence") {
@@ -47,33 +47,33 @@ class RotorSteppingSpec extends FunSpec {
       var engine = new Engine (key)
 
       // normal step of right rotor
-      engine.leftWheel.position should be (leftWheelKey.position)
-      engine.middleWheel.position should be (middleWheelKey.position)
-      engine.rightWheel.position should be (rightWheelKey.position)
+      engine.leftWheel.rotorOffset should be (leftWheelKey.rotorOffset)
+      engine.middleWheel.rotorOffset should be (middleWheelKey.rotorOffset)
+      engine.rightWheel.rotorOffset should be (rightWheelKey.rotorOffset)
 
       // right rotor (III) goes in V—notch position
       engine = engine.stepRotors ()
-      engine.leftWheel.position should be (leftWheelKey.position)
-      engine.middleWheel.position should be (middleWheelKey.position)
-      engine.rightWheel.position should be ('V')
+      engine.leftWheel.rotorOffset should be (leftWheelKey.rotorOffset)
+      engine.middleWheel.rotorOffset should be (middleWheelKey.rotorOffset)
+      engine.rightWheel.rotorOffset should be ('V')
 
       // right rotor steps, takes middle rotor (II) one step further, which is now in its own E—notch position
       engine = engine.stepRotors ()
-      engine.leftWheel.position should be (leftWheelKey.position)
-      engine.middleWheel.position should be ('E')
-      engine.rightWheel.position should be ('W')
+      engine.leftWheel.rotorOffset should be (leftWheelKey.rotorOffset)
+      engine.middleWheel.rotorOffset should be ('E')
+      engine.rightWheel.rotorOffset should be ('W')
 
       // normal step of right rotor, double step of middle rotor, normal step of left rotor
       engine = engine.stepRotors ()
-      engine.leftWheel.position should be ('B')
-      engine.middleWheel.position should be ('F')
-      engine.rightWheel.position should be ('X')
+      engine.leftWheel.rotorOffset should be ('B')
+      engine.middleWheel.rotorOffset should be ('F')
+      engine.rightWheel.rotorOffset should be ('X')
 
       // normal step of right rotor
       engine = engine.stepRotors ()
-      engine.leftWheel.position should be ('B')
-      engine.middleWheel.position should be ('F')
-      engine.rightWheel.position should be ('Y')
+      engine.leftWheel.rotorOffset should be ('B')
+      engine.middleWheel.rotorOffset should be ('F')
+      engine.rightWheel.rotorOffset should be ('Y')
     }
   }
 }

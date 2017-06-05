@@ -14,5 +14,5 @@ class DailyKey (
 class WheelKey (
                  val rotorName: String,
                  val ringSetting: Int,
-                 val position: Char
+                 val rotorOffset: Char
                )
