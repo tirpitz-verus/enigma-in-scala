@@ -1,31 +1,47 @@
 package mlesiewski.enigmainscala.engine
 
+import mlesiewski.enigmainscala.engine.rotor.{Reflector, SteppingRotor}
+
+private[engine] object Engine {
+
+  def apply (dailyKey: DailyKey): Engine = {
+    val keyboard: Keyboard = null
+    val lampboard: Lampboard = null
+    val plugboard: Plugboard = null
+    val greekWheel: Option[SteppingRotor] = dailyKey.greekWheel.map(key => SteppingRotor(key))
+    val reflector: Reflector = greekWheel match {
+      case Some (_) => Reflector.asThin(Reflector(dailyKey.reflectorName))
+      case None => Reflector(dailyKey.reflectorName)
+    }
+    val leftWheel: SteppingRotor = SteppingRotor(dailyKey.leftWheel)
+    val middleWheel: SteppingRotor = SteppingRotor(dailyKey.middleWheel)
+    val rightWheel: SteppingRotor = SteppingRotor(dailyKey.rightWheel)
+    new Engine(
+      keyboard,
+      lampboard,
+      plugboard,
+      reflector,
+      greekWheel,
+      leftWheel,
+      middleWheel,
+      rightWheel
+    )
+  }
+}
+
 /** Describes a group of parts of the 4-wheel (M4 or Navy) Enigma machine.
   * Effectively this is the state before the next keystroke.
   */
-class Engine private[engine] (
-                               val keyboard: Keyboard,
-                               val lampboard: Lampboard,
-                               val plugboard: Plugboard,
-                               val reflector: Reflector,
-                               val greekWheel: Option[SteppingRotor],
-                               val leftWheel: SteppingRotor,
-                               val middleWheel: SteppingRotor,
-                               val rightWheel: SteppingRotor
-                             ) {
-
-  private[engine] def this (dailyKey: DailyKey) = {
-    this (
-      null,
-      null,
-      null, // dailyKey.pluggedPairs
-      Reflector.get (dailyKey.reflectorName),
-      SteppingRotor.get (dailyKey.greekWheel),
-      SteppingRotor.get (dailyKey.leftWheel),
-      SteppingRotor.get (dailyKey.middleWheel),
-      SteppingRotor.get (dailyKey.rightWheel)
-    )
-  }
+private[engine] class Engine private (
+                                       val keyboard: Keyboard,
+                                       val lampboard: Lampboard,
+                                       val plugboard: Plugboard,
+                                       val reflector: Reflector,
+                                       val greekWheel: Option[SteppingRotor],
+                                       val leftWheel: SteppingRotor,
+                                       val middleWheel: SteppingRotor,
+                                       val rightWheel: SteppingRotor
+                                     ) {
 
   /** Simulates when a key is pressed on the Enigma machine.
     * First rotors are stepped.
@@ -39,24 +55,15 @@ class Engine private[engine] (
     val steppedEngine = stepRotors ()
     val letter = steppedEngine.encode (key)
     val newLampboard = lampboard.highlight (letter)
-    new Engine (keyboard, newLampboard, plugboard, reflector, steppedEngine)
-  }
-
-  private def this (
-                     keyboard: Keyboard,
-                     lampboard: Lampboard,
-                     plugboard: Plugboard,
-                     reflector: Reflector,
-                     engine: Engine) = {
-    this (
+    new Engine (
       keyboard,
-      lampboard,
+      newLampboard,
       plugboard,
       reflector,
-      engine.greekWheel,
-      engine.leftWheel,
-      engine.middleWheel,
-      engine.rightWheel
+      steppedEngine.greekWheel,
+      steppedEngine.leftWheel,
+      steppedEngine.middleWheel,
+      steppedEngine.rightWheel
     )
   }
 

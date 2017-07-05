@@ -1,19 +1,25 @@
-package mlesiewski.enigmainscala.engine
+package mlesiewski.enigmainscala.engine.rotor
+
+import mlesiewski.enigmainscala.engine._
 
 /** A rotor that can step - the offset of the rotor can be modified so that
   * the wiring would encode letters differently
+  *
+  * @param rotorOffset offset of this rotor that changes with stepping
+  * @param wiring      wiring of the rotor
+  * @param notches     positions in which a notch would be engaged
   */
-private[engine] abstract class SteppingRotor (
-                                               /** rotor offset - the one displayed by the Enigma panel above the lampboard and changing with rotor stepping */
-                                               val rotorOffset: Char,
+abstract class SteppingRotor (
+                          /** rotor offset - the one displayed by the Enigma panel above the lampboard and changing with rotor stepping */
+                          val rotorOffset: Char,
 
-                                               /** wiring of the rotor that maps letter to one another */
-                                               override val wiring: Wiring,
+                          /** wiring of the rotor that maps letter to one another */
+                          override val wiring: Wiring,
 
-                                               /** notches of the rotor - positions in which a notch would be engaged */
-                                               val notches: Seq[Char]
+                          /** notches of the rotor - positions in which a notch would be engaged */
+                          val notches: Seq[Char]
 
-                                             ) extends Rotor (wiring) {
+                        ) extends Rotor (wiring) {
 
   /** returns the next offset of the rotor
     *
@@ -34,20 +40,13 @@ private[engine] abstract class SteppingRotor (
   private[engine] def notchEngaged: Boolean = notches contains rotorOffset
 }
 
-/** a companion object for obtaining SteppingRotor instances */
-private[engine] object SteppingRotor {
+object SteppingRotor {
 
   /**
     * @param wheelKey a key for the wheel
     * @return an instance of a SteppingRotor
     */
-  def get (wheelKey: Option[WheelKey]): Option[SteppingRotor] = wheelKey.map (wheelKey => get (wheelKey.rotorName, wheelKey.rotorOffset, wheelKey.ringSetting))
-
-  /**
-    * @param wheelKey a key for the wheel
-    * @return an instance of a SteppingRotor
-    */
-  def get (wheelKey: WheelKey): SteppingRotor = get (wheelKey.rotorName, wheelKey.rotorOffset, wheelKey.ringSetting)
+  def apply (wheelKey: WheelKey): SteppingRotor = SteppingRotor.apply (wheelKey.rotorName, wheelKey.rotorOffset, wheelKey.ringSetting)
 
 
   /** returns an instance of SteppingRotor
@@ -57,7 +56,7 @@ private[engine] object SteppingRotor {
     * @param ringSetting ring setting
     * @return an instance of a SteppingRotor
     */
-  def get (rotorName: String, rotorOffset: Char, ringSetting: Int): SteppingRotor = rotorName match {
+  def apply (rotorName: String, rotorOffset: Char, ringSetting: Int): SteppingRotor = rotorName match {
     case "I" => new Rotor_I (rotorOffset, ringSetting)
     case "II" => new Rotor_II (rotorOffset, ringSetting)
     case "III" => new Rotor_III (rotorOffset, ringSetting)
@@ -66,15 +65,14 @@ private[engine] object SteppingRotor {
     case "VI" => new Rotor_VI (rotorOffset, ringSetting)
     case "VII" => new Rotor_VII (rotorOffset, ringSetting)
     case "VIII" => new Rotor_VIII (rotorOffset, ringSetting)
-    case _ => throw new IllegalArgumentException ("unknown rotorName")
+    case _ => throw new IllegalArgumentException (s"unknown rotor name $rotorName")
   }
 }
 
-
-private[engine] class Rotor_I (
-                                rotorOffset: Char,
-                                ringSetting: Int
-                              ) extends SteppingRotor (rotorOffset, new Wiring ("EKMFLGDQVZNTOWYHXUSPAIBRCJ", ringSetting + rotorOffset), Seq ('Q')) {
+class Rotor_I (
+                rotorOffset: Char,
+                ringSetting: Int
+              ) extends SteppingRotor (rotorOffset, new Wiring ("EKMFLGDQVZNTOWYHXUSPAIBRCJ", ringSetting + rotorOffset), Seq ('Q')) {
 
   val rotorName: String = "I"
   val partName: String = "Rotor I"
@@ -83,10 +81,10 @@ private[engine] class Rotor_I (
   override def step: SteppingRotor = new Rotor_I (nextOffset, ringSetting)
 }
 
-private[engine] class Rotor_II (
-                                 rotorOffset: Char,
-                                 ringSetting: Int
-                               ) extends SteppingRotor (rotorOffset, new Wiring ("AJDKSIRUXBLHWTMCQGZNPYFVOE", ringSetting + rotorOffset), Seq ('E')) {
+class Rotor_II (
+                 rotorOffset: Char,
+                 ringSetting: Int
+               ) extends SteppingRotor (rotorOffset, new Wiring ("AJDKSIRUXBLHWTMCQGZNPYFVOE", ringSetting + rotorOffset), Seq ('E')) {
 
   val rotorName: String = "II"
   val partName: String = "Rotor II"
@@ -95,10 +93,10 @@ private[engine] class Rotor_II (
   override def step: SteppingRotor = new Rotor_II (nextOffset, ringSetting)
 }
 
-private[engine] class Rotor_III (
-                                  rotorOffset: Char,
-                                  ringSetting: Int
-                                ) extends SteppingRotor (rotorOffset, new Wiring ("BDFHJLCPRTXVZNYEIWGAKMUSQO", ringSetting + rotorOffset), Seq ('V')) {
+class Rotor_III (
+                  rotorOffset: Char,
+                  ringSetting: Int
+                ) extends SteppingRotor (rotorOffset, new Wiring ("BDFHJLCPRTXVZNYEIWGAKMUSQO", ringSetting + rotorOffset), Seq ('V')) {
 
   val rotorName: String = "III"
   val partName: String = "Rotor III"
@@ -107,10 +105,10 @@ private[engine] class Rotor_III (
   override def step: SteppingRotor = new Rotor_III (nextOffset, ringSetting)
 }
 
-private[engine] class Rotor_IV (
-                                 rotorOffset: Char,
-                                 ringSetting: Int
-                               ) extends SteppingRotor (rotorOffset, new Wiring ("ESOVPZJAYQUIRHXLNFTGKDCMWB", ringSetting + rotorOffset), Seq ('J')) {
+class Rotor_IV (
+                 rotorOffset: Char,
+                 ringSetting: Int
+               ) extends SteppingRotor (rotorOffset, new Wiring ("ESOVPZJAYQUIRHXLNFTGKDCMWB", ringSetting + rotorOffset), Seq ('J')) {
 
   val rotorName: String = "IV"
   val partName: String = "Rotor IV"
@@ -119,10 +117,10 @@ private[engine] class Rotor_IV (
   override def step: SteppingRotor = new Rotor_IV (nextOffset, ringSetting)
 }
 
-private[engine] class Rotor_V (
-                                rotorOffset: Char,
-                                ringSetting: Int
-                              ) extends SteppingRotor (rotorOffset, new Wiring ("VZBRGITYUPSDNHLXAWMJQOFECK", ringSetting + rotorOffset), Seq ('Z')) {
+class Rotor_V (
+                rotorOffset: Char,
+                ringSetting: Int
+              ) extends SteppingRotor (rotorOffset, new Wiring ("VZBRGITYUPSDNHLXAWMJQOFECK", ringSetting + rotorOffset), Seq ('Z')) {
 
   val rotorName: String = "V"
   val partName: String = "Rotor V"
@@ -131,10 +129,10 @@ private[engine] class Rotor_V (
   override def step: SteppingRotor = new Rotor_V (nextOffset, ringSetting)
 }
 
-private[engine] class Rotor_VI (
-                                 rotorOffset: Char,
-                                 ringSetting: Int
-                               ) extends SteppingRotor (rotorOffset, new Wiring ("JPGVOUMFYQBENHZRDKASXLICTW", ringSetting + rotorOffset), Seq ('Z', 'M')) {
+class Rotor_VI (
+                 rotorOffset: Char,
+                 ringSetting: Int
+               ) extends SteppingRotor (rotorOffset, new Wiring ("JPGVOUMFYQBENHZRDKASXLICTW", ringSetting + rotorOffset), Seq ('Z', 'M')) {
 
   val rotorName: String = "VI"
   val partName: String = "Rotor VI"
@@ -144,10 +142,10 @@ private[engine] class Rotor_VI (
   override def step: SteppingRotor = new Rotor_VI (nextOffset, ringSetting)
 }
 
-private[engine] class Rotor_VII (
-                                  rotorOffset: Char,
-                                  ringSetting: Int
-                                ) extends SteppingRotor (rotorOffset, new Wiring ("NZJHGRCXMYSWBOUFAIVLPEKQDT", ringSetting + rotorOffset), Seq ('Z', 'M')) {
+class Rotor_VII (
+                  rotorOffset: Char,
+                  ringSetting: Int
+                ) extends SteppingRotor (rotorOffset, new Wiring ("NZJHGRCXMYSWBOUFAIVLPEKQDT", ringSetting + rotorOffset), Seq ('Z', 'M')) {
 
   val rotorName: String = "VII"
   val partName: String = "Rotor VII"
@@ -157,10 +155,10 @@ private[engine] class Rotor_VII (
   override def step: SteppingRotor = new Rotor_VII (nextOffset, ringSetting)
 }
 
-private[engine] class Rotor_VIII (
-                                   rotorOffset: Char,
-                                   ringSetting: Int
-                                 ) extends SteppingRotor (rotorOffset, new Wiring ("FKQHTLXOCBJSPDZRAMEWNIUYGV", ringSetting + rotorOffset), Seq ('Z', 'M')) {
+class Rotor_VIII (
+                   rotorOffset: Char,
+                   ringSetting: Int
+                 ) extends SteppingRotor (rotorOffset, new Wiring ("FKQHTLXOCBJSPDZRAMEWNIUYGV", ringSetting + rotorOffset), Seq ('Z', 'M')) {
 
   val rotorName: String = "VIII"
   val partName: String = "Rotor VIII"

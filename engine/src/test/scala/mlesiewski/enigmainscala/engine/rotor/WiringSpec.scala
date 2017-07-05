@@ -1,4 +1,4 @@
-package mlesiewski.enigmainscala.engine
+package mlesiewski.enigmainscala.engine.rotor
 
 import org.scalatest.Inspectors._
 import org.scalatest.Matchers._

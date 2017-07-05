@@ -1,7 +1,7 @@
 package mlesiewski.enigmainscala.engine
 
 /** A 26-letter QWERTZ keyboard used in Enigma machines. */
-trait Keyboard extends EnigmaPart {
+trait Keyboard extends Part {
 
   /** last letter that was typed */
   val typedLetter: Option[Char]

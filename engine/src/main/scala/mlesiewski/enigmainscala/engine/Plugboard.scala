@@ -1,6 +1,6 @@
 package mlesiewski.enigmainscala.engine
 
-trait Plugboard extends EnigmaPart {
+trait Plugboard extends Part {
 
   val pluggedPairs: Seq[(Char, Char)]
 

@@ -6,10 +6,10 @@ package mlesiewski.enigmainscala.engine
   * @param dailyKey daily key to initialize this station
   * @param engine   an Engine with all the parts
   */
-class EnigmaStation private[engine] (
-                      val dailyKey: DailyKey,
-                      val engine: Engine
-                    ) {
+class EnigmaStation private (
+                              val dailyKey: DailyKey,
+                              val engine: Engine
+                            ) {
 
   /**
     * @param message a message do encode
@@ -24,14 +24,11 @@ class EnigmaStation private[engine] (
   def decode (encoded: String): Message = ???
 }
 
-/**
-  * A companion object initialize the station.
-  */
 object EnigmaStation {
 
   /**
     * @param dailyKey a daily key to initialize a station with
     * @return a station ready for work
     */
-  def get (dailyKey: DailyKey): EnigmaStation = new EnigmaStation(dailyKey, new Engine(dailyKey))
+  def apply (dailyKey: DailyKey): EnigmaStation = new EnigmaStation (dailyKey, Engine (dailyKey))
 }

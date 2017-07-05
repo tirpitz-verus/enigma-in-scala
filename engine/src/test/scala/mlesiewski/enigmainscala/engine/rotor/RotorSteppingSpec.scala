@@ -1,5 +1,6 @@
-package mlesiewski.enigmainscala.engine
+package mlesiewski.enigmainscala.engine.rotor
 
+import mlesiewski.enigmainscala.engine.{DailyKey, Engine, WheelKey}
 import org.scalatest.Matchers._
 import org.scalatest._
 
@@ -8,8 +9,8 @@ class RotorSteppingSpec extends FunSpec {
   it ("rotor offset affects letter encoding in the same way as ring setting") {
     val letter = 'C'
 
-    val rotor_2_A = SteppingRotor.get(new WheelKey ("I", 2, 'A'))
-    val rotor_1_B = SteppingRotor.get(new WheelKey ("I", 1, 'B'))
+    val rotor_2_A = SteppingRotor(new WheelKey ("I", 2, 'A'))
+    val rotor_1_B = SteppingRotor(new WheelKey ("I", 1, 'B'))
 
     rotor_1_B.encode(letter) should be (rotor_2_A.encode(letter))
   }
@@ -24,7 +25,7 @@ class RotorSteppingSpec extends FunSpec {
     it ("in the so-called normal sequence") {
       val middleWheelKey = new WheelKey ("II", 1, 'A')
       val key = new DailyKey (reflectorName, Option.empty, leftWheelKey, middleWheelKey, rightWheelKey, Seq.empty)
-      var engine = new Engine (key)
+      var engine = Engine (key)
 
       // normal step of right rotor
       engine.leftWheel.rotorOffset should be (leftWheelKey.rotorOffset)
@@ -53,7 +54,7 @@ class RotorSteppingSpec extends FunSpec {
     it ("in the so-called double step sequence") {
       val middleWheelKey = new WheelKey ("II", 1, 'D')
       val key = new DailyKey (reflectorName, Option.empty, leftWheelKey, middleWheelKey, rightWheelKey, Seq.empty)
-      var engine = new Engine (key)
+      var engine = Engine (key)
 
       // normal step of right rotor
       engine.leftWheel.rotorOffset should be (leftWheelKey.rotorOffset)

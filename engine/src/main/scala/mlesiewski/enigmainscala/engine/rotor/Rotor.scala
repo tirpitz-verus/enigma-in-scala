@@ -1,4 +1,6 @@
-package mlesiewski.enigmainscala.engine
+package mlesiewski.enigmainscala.engine.rotor
+
+import mlesiewski.enigmainscala.engine.{Part, WheelKey}
 
 /** Describes an Enigma wheel (wheel, drum or scrambler - Waltzen in German).
   *
@@ -8,7 +10,7 @@ package mlesiewski.enigmainscala.engine
 abstract class Rotor private[engine] (
                                        /** wiring of the rotor that maps letter to one another */
                                        val wiring: Wiring
-                                     ) extends EnigmaPart {
+                                     ) extends Part {
 
   /** encodes a single letter
     *
