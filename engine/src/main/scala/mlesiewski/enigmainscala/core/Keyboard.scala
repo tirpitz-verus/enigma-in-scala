@@ -1,4 +1,4 @@
-package mlesiewski.enigmainscala.engine
+package mlesiewski.enigmainscala.core
 
 /** A 26-letter QWERTZ keyboard used in Enigma machines. */
 trait Keyboard extends Part {

@@ -1,4 +1,4 @@
-package mlesiewski.enigmainscala.engine
+package mlesiewski.enigmainscala.core
 
 /**
   * Main class of the package. Here one can encode and decode messages.

@@ -1,4 +1,4 @@
-package mlesiewski.enigmainscala.engine
+package mlesiewski.enigmainscala.core
 
 /** Will allow an user interface to create descriptions for the user. */
 trait Part {

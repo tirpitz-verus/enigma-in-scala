@@ -1,6 +1,6 @@
-package mlesiewski.enigmainscala.engine.rotor
+package mlesiewski.enigmainscala.core.rotor
 
-import mlesiewski.enigmainscala.engine._
+import mlesiewski.enigmainscala.core._
 
 /** A rotor that can step - the offset of the rotor can be modified so that
   * the wiring would encode letters differently
@@ -31,13 +31,13 @@ abstract class SteppingRotor (
     *
     * @return a stepped SteppingRotor
     */
-  private[engine] def step: SteppingRotor
+  private[core] def step: SteppingRotor
 
   /** Checks if the notch is engaged - should the next rotor be stepped.
     *
     * @return true if the notch is engaged
     */
-  private[engine] def notchEngaged: Boolean = notches contains rotorOffset
+  private[core] def notchEngaged: Boolean = notches contains rotorOffset
 }
 
 object SteppingRotor {

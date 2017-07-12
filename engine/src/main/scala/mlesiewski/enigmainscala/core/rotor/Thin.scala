@@ -1,4 +1,4 @@
-package mlesiewski.enigmainscala.engine.rotor
+package mlesiewski.enigmainscala.core.rotor
 
 /** Used to mark a Reflector as being Thin.
   * Historically thinner reflectors were used along with greek (4th position) rotors

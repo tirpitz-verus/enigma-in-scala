@@ -1,4 +1,4 @@
-package mlesiewski.enigmainscala.engine
+package mlesiewski.enigmainscala.core
 
 import scala.collection.mutable
 import scala.collection.mutable.StringBuilder
@@ -29,7 +29,7 @@ object Message {
   def fromPrettyText (setting: (Char, Char, Char), prettyText: String): Message =
     new Message (setting, prettyText, toEnigmaFormat (prettyText))
 
-  private[engine] def toEnigmaFormat (prettyText: String): String = {
+  private[core] def toEnigmaFormat (prettyText: String): String = {
     implicit val allowed = letters + numbers
     val result = valid (prettyText.toUpperCase)
     "([0-9]+)".r.replaceAllIn (result, m => number2letter (m.matched))
@@ -50,7 +50,7 @@ object Message {
   def fromEnigmaFormat (setting: (Char, Char, Char), inEnigmaFormat: String): Message =
     new Message (setting, toPrettyText (inEnigmaFormat), inEnigmaFormat)
 
-  private[engine] def toPrettyText (inEnigmaFormat: String): String = {
+  private[core] def toPrettyText (inEnigmaFormat: String): String = {
     implicit val allowed = letters
     val result = valid (inEnigmaFormat.toUpperCase)
     s"Y[$lettersEncodingNumbers]+".r.replaceAllIn (result, m => letter2number (m.matched))

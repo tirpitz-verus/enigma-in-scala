@@ -1,4 +1,4 @@
-package mlesiewski.enigmainscala.engine
+package mlesiewski.enigmainscala.core
 
 /** A set of starting settings for the parts of the Enigma. */
 class DailyKey (

@@ -1,6 +1,6 @@
-package mlesiewski.enigmainscala.engine.rotor
+package mlesiewski.enigmainscala.core.rotor
 
-import mlesiewski.enigmainscala.engine.{DailyKey, Engine, WheelKey}
+import mlesiewski.enigmainscala.core.{DailyKey, Engine, WheelKey}
 import org.scalatest.Matchers._
 import org.scalatest._
 

@@ -1,4 +1,4 @@
-package mlesiewski.enigmainscala.engine
+package mlesiewski.enigmainscala.core
 
 /** An output for the Enigma machine. */
 trait Lampboard {

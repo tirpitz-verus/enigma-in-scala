@@ -1,8 +1,8 @@
-package mlesiewski.enigmainscala.engine
+package mlesiewski.enigmainscala.core
 
-import mlesiewski.enigmainscala.engine.rotor.{Reflector, SteppingRotor}
+import mlesiewski.enigmainscala.core.rotor.{Reflector, SteppingRotor}
 
-private[engine] object Engine {
+private[core] object Engine {
 
   def apply (dailyKey: DailyKey): Engine = {
     val keyboard: Keyboard = null
@@ -32,7 +32,7 @@ private[engine] object Engine {
 /** Describes a group of parts of the 4-wheel (M4 or Navy) Enigma machine.
   * Effectively this is the state before the next keystroke.
   */
-private[engine] class Engine private (
+private[core] class Engine private (
                                        val keyboard: Keyboard,
                                        val lampboard: Lampboard,
                                        val plugboard: Plugboard,
@@ -51,7 +51,7 @@ private[engine] class Engine private (
     * @param key a character that was entered into the enigma machine
     * @return a new state of the engine - with rotors stepped, and lampboard lit
     */
-  private[engine] def pressKey (key: Char): Engine = {
+  private[core] def pressKey (key: Char): Engine = {
     val steppedEngine = stepRotors ()
     val letter = steppedEngine.encode (key)
     val newLampboard = lampboard.highlight (letter)
@@ -71,7 +71,7 @@ private[engine] class Engine private (
     *
     * @return an Engine with its rotors stepped
     */
-  private[engine] def stepRotors () = {
+  private[core] def stepRotors () = {
     val newRightWheel = rightWheel.step
     var newMiddleWheel = if (rightWheel.notchEngaged) middleWheel.step else middleWheel
     val newLeftWheel = if (middleWheel.notchEngaged) leftWheel.step else leftWheel
