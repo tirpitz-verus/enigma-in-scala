@@ -4,12 +4,10 @@ package mlesiewski.enigmainscala.core
   * Main class of the package. Here one can encode and decode messages.
   *
   * @param dailyKey daily key to initialize this station
-  * @param engine   an Engine with all the parts
   */
-class EnigmaStation private (
-                              val dailyKey: DailyKey,
-                              val engine: Engine
-                            ) {
+class Enigma private (
+                       val dailyKey: DailyKey
+                     ) {
 
   /**
     * @param message a message do encode
@@ -24,11 +22,11 @@ class EnigmaStation private (
   def decode (encoded: String): Message = ???
 }
 
-object EnigmaStation {
+object Enigma {
 
   /**
     * @param dailyKey a daily key to initialize a station with
     * @return a station ready for work
     */
-  def apply (dailyKey: DailyKey): EnigmaStation = new EnigmaStation (dailyKey, Engine (dailyKey))
+  def apply (dailyKey: DailyKey): Enigma = new Enigma (dailyKey)
 }
