@@ -7,16 +7,16 @@ private[core] object Engine {
   def apply (dailyKey: DailyKey): Engine = {
     val keyboard: Keyboard = null
     val lampboard: Lampboard = null
-    val plugboard: Plugboard = null
-    val greekWheel: Option[SteppingRotor] = dailyKey.greekWheel.map(key => SteppingRotor(key))
+    val plugboard: Plugboard = Plugboard (dailyKey.pluggedPairs)
+    val greekWheel: Option[SteppingRotor] = dailyKey.greekWheel.map (key => SteppingRotor (key))
     val reflector: Reflector = greekWheel match {
-      case Some (_) => Reflector.asThin(Reflector(dailyKey.reflectorName))
-      case None => Reflector(dailyKey.reflectorName)
+      case Some (_) => Reflector.asThin (Reflector (dailyKey.reflectorName))
+      case None => Reflector (dailyKey.reflectorName)
     }
-    val leftWheel: SteppingRotor = SteppingRotor(dailyKey.leftWheel)
-    val middleWheel: SteppingRotor = SteppingRotor(dailyKey.middleWheel)
-    val rightWheel: SteppingRotor = SteppingRotor(dailyKey.rightWheel)
-    new Engine(
+    val leftWheel: SteppingRotor = SteppingRotor (dailyKey.leftWheel)
+    val middleWheel: SteppingRotor = SteppingRotor (dailyKey.middleWheel)
+    val rightWheel: SteppingRotor = SteppingRotor (dailyKey.rightWheel)
+    new Engine (
       keyboard,
       lampboard,
       plugboard,
@@ -33,15 +33,15 @@ private[core] object Engine {
   * Effectively this is the state before the next keystroke.
   */
 private[core] class Engine private (
-                                       val keyboard: Keyboard,
-                                       val lampboard: Lampboard,
-                                       val plugboard: Plugboard,
-                                       val reflector: Reflector,
-                                       val greekWheel: Option[SteppingRotor],
-                                       val leftWheel: SteppingRotor,
-                                       val middleWheel: SteppingRotor,
-                                       val rightWheel: SteppingRotor
-                                     ) {
+                                     val keyboard: Keyboard,
+                                     val lampboard: Lampboard,
+                                     val plugboard: Plugboard,
+                                     val reflector: Reflector,
+                                     val greekWheel: Option[SteppingRotor],
+                                     val leftWheel: SteppingRotor,
+                                     val middleWheel: SteppingRotor,
+                                     val rightWheel: SteppingRotor
+                                   ) {
 
   /** Simulates when a key is pressed on the Enigma machine.
     * First rotors are stepped.

@@ -17,7 +17,7 @@ class Message (
 
 object Message {
 
-  private val letters = "QWERTYUIOPASDFGHJKLZXCVBNM"
+  val letters = "QWERTYUIOPASDFGHJKLZXCVBNM"
   private val numbers = "1234567890"
   private val lettersEncodingNumbers = "PQWERTZUIO"
 
