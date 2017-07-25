@@ -26,7 +26,7 @@ class Plugboard private[core] (
 
   require (mappings.size == pluggedPairs.size * 2, "mappings size should twice the length of plugged pairs but " +
   s"${pluggedPairs.size} pairs resulted in only $mappings")
-  
+
   def encode (key: Char): Char = mappings.getOrElse (key.toUpper, key)
 
 }
