@@ -1,6 +1,6 @@
 package mlesiewski.enigmainscala.core.rotor
 
-import mlesiewski.enigmainscala.core.{Part, WheelKey}
+import mlesiewski.enigmainscala.core.Part
 
 /** Describes an Enigma wheel (wheel, drum or scrambler - Waltzen in German).
   *

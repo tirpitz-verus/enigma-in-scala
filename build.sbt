@@ -9,7 +9,7 @@ lazy val commonSettings = Seq(
 )
 
 lazy val root = (project in file(".")).
-  aggregate(engine, cli)
+  aggregate(core, cli)
 
 lazy val cli = project.
   enablePlugins(JvmPlugin).
@@ -17,10 +17,10 @@ lazy val cli = project.
   settings(
     name := name + "-cli",
     mainClass in Compile := Some("mlesiewski.enigmainscala.Main")
-  ).dependsOn(engine)
+  ).dependsOn(core)
 
-lazy val engine = project.
+lazy val core = project.
   settings(commonSettings: _*).
   settings(
-    name := name + "-engine"
+    name := name + "-core"
   )
