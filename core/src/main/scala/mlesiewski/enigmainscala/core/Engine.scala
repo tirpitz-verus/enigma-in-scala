@@ -4,9 +4,9 @@ import mlesiewski.enigmainscala.core.rotor.{Reflector, SteppingRotor}
 
 private[core] object Engine {
 
-  def apply (dailyKey: DailyKey): Engine = {
-    val keyboard: Keyboard = null
-    val lampboard: Lampboard = null
+  def apply (dailyKey: DailyKey): Engine = apply(dailyKey, new BasicLampboard(), null)
+
+  def apply (dailyKey: DailyKey, lampboard: Lampboard, keyboard: Keyboard): Engine = {
     val plugboard: Plugboard = Plugboard (dailyKey.pluggedPairs)
     val greekWheel: Option[SteppingRotor] = dailyKey.greekWheel.map (key => SteppingRotor (key))
     val reflector: Reflector = greekWheel match {
@@ -54,10 +54,10 @@ private[core] class Engine private (
   private[core] def pressKey (key: Char): Engine = {
     val steppedEngine = stepRotors ()
     val letter = steppedEngine.encode (key)
-    val newLampboard = lampboard.highlight (letter)
+    lampboard.highlight (letter)
     new Engine (
       keyboard,
-      newLampboard,
+      lampboard,
       plugboard,
       reflector,
       steppedEngine.greekWheel,

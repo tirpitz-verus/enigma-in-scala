@@ -1,12 +1,11 @@
 package mlesiewski.enigmainscala.core
 
 /**
-  * Main class of the package. Here one can encode and decode messages.
-  *
-  * @param dailyKey daily key to initialize this station
+  * Main class of the package that simulates the Enigma machine.
+  * Here one can encode and decode messages.
   */
 class Enigma private (
-                       val dailyKey: DailyKey
+                       private[core] val engine: Engine
                      ) {
 
   /**
@@ -20,6 +19,12 @@ class Enigma private (
     * @return a decoded message
     */
   def decode (encoded: String): Message = ???
+
+  /** @return a Lampboard to query */
+  def lampboard: Lampboard = engine.lampboard
+
+  /** @return a Keyboard to press buttons on */
+  def keyboard: Keyboard = engine.keyboard
 }
 
 object Enigma {
@@ -28,5 +33,14 @@ object Enigma {
     * @param dailyKey a daily key to initialize a station with
     * @return a station ready for work
     */
-  def apply (dailyKey: DailyKey): Enigma = new Enigma (dailyKey)
+  def apply (dailyKey: DailyKey): Enigma = new Enigma (Engine (dailyKey, new BasicLampboard(), null))
+
+  /**
+    * @param dailyKey  a daily key to initialize a station with
+    * @param lampboard a Lampboard implementation
+    * @param keyboard  a Keyboard implementation
+    * @return a station ready for work
+    */
+  def apply (dailyKey: DailyKey, lampboard: Lampboard, keyboard: Keyboard): Enigma =
+    new Enigma (Engine (dailyKey, lampboard, keyboard))
 }
