@@ -1,5 +1,7 @@
 package mlesiewski.enigmainscala.core
 
+import mlesiewski.enigmainscala.core.keyboard.{DummyKeyboard, Keyboard}
+
 /**
   * Main class of the package that simulates the Enigma machine.
   * Here one can encode and decode messages.
@@ -33,7 +35,7 @@ object Enigma {
     * @param dailyKey a daily key to initialize a station with
     * @return a station ready for work
     */
-  def apply (dailyKey: DailyKey): Enigma = new Enigma (Engine (dailyKey, new BasicLampboard(), null))
+  def apply (dailyKey: DailyKey): Enigma = new Enigma (Engine (dailyKey, new BasicLampboard, new DummyKeyboard))
 
   /**
     * @param dailyKey  a daily key to initialize a station with

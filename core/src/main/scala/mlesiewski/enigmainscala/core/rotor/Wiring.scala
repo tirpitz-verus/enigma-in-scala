@@ -18,4 +18,7 @@ private[core] class Wiring (
     * @return encoded character
     */
   def encode (letter: Char): Char = baseSetting.charAt ((letter.toInt - 66 + ringSetting) % 26)
+
+
+  override def toString: String = s"Wiring($baseSetting, $ringSetting)"
 }

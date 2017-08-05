@@ -1,10 +1,11 @@
 package mlesiewski.enigmainscala.core
 
+import mlesiewski.enigmainscala.core.keyboard.{DummyKeyboard, Keyboard, KeyboardListener}
 import mlesiewski.enigmainscala.core.rotor.{Reflector, SteppingRotor}
 
 private[core] object Engine {
 
-  def apply (dailyKey: DailyKey): Engine = apply(dailyKey, new BasicLampboard(), null)
+  def apply (dailyKey: DailyKey): Engine = apply (dailyKey, new BasicLampboard (), new DummyKeyboard)
 
   def apply (dailyKey: DailyKey, lampboard: Lampboard, keyboard: Keyboard): Engine = {
     val plugboard: Plugboard = Plugboard (dailyKey.pluggedPairs)
@@ -38,33 +39,17 @@ private[core] class Engine private (
                                      val plugboard: Plugboard,
                                      val reflector: Reflector,
                                      val greekWheel: Option[SteppingRotor],
-                                     val leftWheel: SteppingRotor,
-                                     val middleWheel: SteppingRotor,
-                                     val rightWheel: SteppingRotor
-                                   ) {
+                                     var leftWheel: SteppingRotor,
+                                     var middleWheel: SteppingRotor,
+                                     var rightWheel: SteppingRotor
+                                   ) extends KeyboardListener {
 
-  /** Simulates when a key is pressed on the Enigma machine.
-    * First rotors are stepped.
-    * Then the character is feed through the rotors.
-    * The result is switched on the lampbord.
-    *
-    * @param key a character that was entered into the enigma machine
-    * @return a new state of the engine - with rotors stepped, and lampboard lit
-    */
-  private[core] def pressKey (key: Char): Engine = {
-    val steppedEngine = stepRotors ()
-    val letter = steppedEngine.encode (key)
-    lampboard.highlight (letter)
-    new Engine (
-      keyboard,
-      lampboard,
-      plugboard,
-      reflector,
-      steppedEngine.greekWheel,
-      steppedEngine.leftWheel,
-      steppedEngine.middleWheel,
-      steppedEngine.rightWheel
-    )
+  keyboard.setListener (this)
+
+  override private[core] def onLetterTyped (letter: Char): Unit = {
+    stepRotors ()
+    val encoded = encode (letter)
+    lampboard.highlight (encoded)
   }
 
   /** steps all the rotors
@@ -76,8 +61,13 @@ private[core] class Engine private (
     var newMiddleWheel = if (rightWheel.notchEngaged) middleWheel.step else middleWheel
     val newLeftWheel = if (middleWheel.notchEngaged) leftWheel.step else leftWheel
     // the left wheel takes middle wheel with it (a.k.a. double stepping)
+    // so if the left wheel stepped so will the middle wheel
     newMiddleWheel = if (middleWheel.notchEngaged) newMiddleWheel.step else newMiddleWheel
-    new Engine (keyboard, lampboard, plugboard, reflector, greekWheel, newLeftWheel, newMiddleWheel, newRightWheel)
+    // stepping takes into account the starting positions of rotors
+    // so now we need to assign them new values
+    rightWheel = newRightWheel
+    middleWheel = newMiddleWheel
+    leftWheel = newLeftWheel
   }
 
   /** Encodes a single letter going through the lapmboard, rotors, reflector and rotors in reverse order

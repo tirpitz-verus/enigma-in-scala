@@ -25,7 +25,7 @@ class RotorSteppingSpec extends FunSpec {
     it ("in the so-called normal sequence") {
       val middleWheelKey = new WheelKey ("II", 1, 'A')
       val key = new DailyKey (reflectorName, Option.empty, leftWheelKey, middleWheelKey, rightWheelKey, Seq.empty)
-      var engine = Engine (key)
+      val engine = Engine (key)
 
       // normal step of right rotor
       engine.leftWheel.rotorOffset should be (leftWheelKey.rotorOffset)
@@ -33,19 +33,19 @@ class RotorSteppingSpec extends FunSpec {
       engine.rightWheel.rotorOffset should be (rightWheelKey.rotorOffset)
 
       // right rotor (III) goes in V—notch position
-      engine = engine.stepRotors ()
+      engine.stepRotors ()
       engine.leftWheel.rotorOffset should be (leftWheelKey.rotorOffset)
       engine.middleWheel.rotorOffset should be (middleWheelKey.rotorOffset)
       engine.rightWheel.rotorOffset should be ('V')
 
       // right rotor takes middle rotor one step further
-      engine = engine.stepRotors ()
+      engine.stepRotors ()
       engine.leftWheel.rotorOffset should be (leftWheelKey.rotorOffset)
       engine.middleWheel.rotorOffset should be ('B')
       engine.rightWheel.rotorOffset should be ('W')
 
       // normal step of right rotor
-      engine = engine.stepRotors ()
+      engine.stepRotors ()
       engine.leftWheel.rotorOffset should be (leftWheelKey.rotorOffset)
       engine.middleWheel.rotorOffset should be ('B')
       engine.rightWheel.rotorOffset should be ('X')
@@ -54,7 +54,7 @@ class RotorSteppingSpec extends FunSpec {
     it ("in the so-called double step sequence") {
       val middleWheelKey = new WheelKey ("II", 1, 'D')
       val key = new DailyKey (reflectorName, Option.empty, leftWheelKey, middleWheelKey, rightWheelKey, Seq.empty)
-      var engine = Engine (key)
+      val engine = Engine (key)
 
       // normal step of right rotor
       engine.leftWheel.rotorOffset should be (leftWheelKey.rotorOffset)
@@ -62,25 +62,25 @@ class RotorSteppingSpec extends FunSpec {
       engine.rightWheel.rotorOffset should be (rightWheelKey.rotorOffset)
 
       // right rotor (III) goes in V—notch position
-      engine = engine.stepRotors ()
+      engine.stepRotors ()
       engine.leftWheel.rotorOffset should be (leftWheelKey.rotorOffset)
       engine.middleWheel.rotorOffset should be (middleWheelKey.rotorOffset)
       engine.rightWheel.rotorOffset should be ('V')
 
       // right rotor steps, takes middle rotor (II) one step further, which is now in its own E—notch position
-      engine = engine.stepRotors ()
+      engine.stepRotors ()
       engine.leftWheel.rotorOffset should be (leftWheelKey.rotorOffset)
       engine.middleWheel.rotorOffset should be ('E')
       engine.rightWheel.rotorOffset should be ('W')
 
       // normal step of right rotor, double step of middle rotor, normal step of left rotor
-      engine = engine.stepRotors ()
+      engine.stepRotors ()
       engine.leftWheel.rotorOffset should be ('B')
       engine.middleWheel.rotorOffset should be ('F')
       engine.rightWheel.rotorOffset should be ('X')
 
       // normal step of right rotor
-      engine = engine.stepRotors ()
+      engine.stepRotors ()
       engine.leftWheel.rotorOffset should be ('B')
       engine.middleWheel.rotorOffset should be ('F')
       engine.rightWheel.rotorOffset should be ('Y')

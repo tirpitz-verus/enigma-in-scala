@@ -18,4 +18,7 @@ abstract class Rotor private[core] (
     * @return an encoded letter
     */
   private[core] def encode (letter: Char): Char = wiring encode letter
+
+
+  override def toString: String = s"Rotor($wiring)"
 }

@@ -15,4 +15,7 @@ class WheelKey (
                  val rotorName: String,
                  val ringSetting: Int,
                  val rotorOffset: Char
-               )
+               ) {
+
+  override def toString: String = s"WheelKey($rotorName, $ringSetting, $rotorOffset)"
+}

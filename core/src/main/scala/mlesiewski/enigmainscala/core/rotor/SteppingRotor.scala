@@ -38,6 +38,8 @@ abstract class SteppingRotor (
     * @return true if the notch is engaged
     */
   private[core] def notchEngaged: Boolean = notches contains rotorOffset
+
+  override def toString: String = s"SteppingRotor($rotorOffset, $wiring, $notches)"
 }
 
 object SteppingRotor {
