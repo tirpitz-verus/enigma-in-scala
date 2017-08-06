@@ -38,7 +38,8 @@ object Enigma {
     */
   val acceptedLetters = "QWERTYUIOPASDFGHJKLZXCVBNM"
 
-  /**
+  /** Creates an Enigma instance with a DummyLampboard and a DummyKeyboard
+    *
     * @param dailyKey a daily key to initialize a station with
     * @return a station ready for work
     */

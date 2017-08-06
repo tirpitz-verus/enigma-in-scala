@@ -1,5 +1,6 @@
 package mlesiewski.enigmainscala.core.lampboard
 
-private[core] class DummyLampboard extends Lampboard {
+/** a dummy implementation that really doesn't do anything */
+class DummyLampboard extends Lampboard {
 
 }
