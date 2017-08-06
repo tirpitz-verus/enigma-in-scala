@@ -20,7 +20,7 @@ class Plugboard private[core] (
 
   val mappings: Map[Char, Char] = pluggedPairs
     /** mappings that the Plugboard will use to encode letters */
-    .filter (pair => Message.letters.contains (pair._1) && Message.letters.contains (pair._2))
+    .filter (pair => Enigma.acceptedLetters.contains (pair._1) && Enigma.acceptedLetters.contains (pair._2))
     .flatMap (pair => Seq ((pair._1, pair._2), (pair._2, pair._1)))
     .toMap
 

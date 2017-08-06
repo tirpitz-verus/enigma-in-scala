@@ -10,6 +10,7 @@ class Enigma private (
                        private[core] val engine: Engine
                      ) {
 
+
   /**
     * @param message a message do encode
     * @return a String representing an encoded message
@@ -30,6 +31,11 @@ class Enigma private (
 }
 
 object Enigma {
+
+  /**
+    * historically Enigma machines worked only on 26 letters alphabets
+    */
+  val acceptedLetters = "QWERTYUIOPASDFGHJKLZXCVBNM"
 
   /**
     * @param dailyKey a daily key to initialize a station with

@@ -17,7 +17,6 @@ class Message (
 
 object Message {
 
-  val letters = "QWERTYUIOPASDFGHJKLZXCVBNM"
   private val numbers = "1234567890"
   private val lettersEncodingNumbers = "PQWERTZUIO"
 
@@ -30,7 +29,7 @@ object Message {
     new Message (setting, prettyText, toEnigmaFormat (prettyText))
 
   private[core] def toEnigmaFormat (prettyText: String): String = {
-    implicit val allowed = letters + numbers
+    implicit val allowed = Enigma.acceptedLetters + numbers
     val result = valid (prettyText.toUpperCase)
     "([0-9]+)".r.replaceAllIn (result, m => number2letter (m.matched))
   }
@@ -51,7 +50,7 @@ object Message {
     new Message (setting, toPrettyText (inEnigmaFormat), inEnigmaFormat)
 
   private[core] def toPrettyText (inEnigmaFormat: String): String = {
-    implicit val allowed = letters
+    implicit val allowed = Enigma.acceptedLetters
     val result = valid (inEnigmaFormat.toUpperCase)
     s"Y[$lettersEncodingNumbers]+".r.replaceAllIn (result, m => letter2number (m.matched))
   }
