@@ -1,6 +1,7 @@
 package mlesiewski.enigmainscala.core
 
 import mlesiewski.enigmainscala.core.keyboard.{DummyKeyboard, Keyboard}
+import mlesiewski.enigmainscala.core.lampboard.{DummyLampboard, Lampboard}
 
 /**
   * Main class of the package that simulates the Enigma machine.
@@ -41,7 +42,7 @@ object Enigma {
     * @param dailyKey a daily key to initialize a station with
     * @return a station ready for work
     */
-  def apply (dailyKey: DailyKey): Enigma = new Enigma (Engine (dailyKey, new BasicLampboard, new DummyKeyboard))
+  def apply (dailyKey: DailyKey): Enigma = new Enigma (Engine (dailyKey, new DummyLampboard, new DummyKeyboard))
 
   /**
     * @param dailyKey  a daily key to initialize a station with

@@ -1,11 +1,12 @@
 package mlesiewski.enigmainscala.core
 
 import mlesiewski.enigmainscala.core.keyboard.{DummyKeyboard, Keyboard, KeyboardListener}
+import mlesiewski.enigmainscala.core.lampboard.{DummyLampboard, Lampboard}
 import mlesiewski.enigmainscala.core.rotor.{Reflector, SteppingRotor}
 
 private[core] object Engine {
 
-  def apply (dailyKey: DailyKey): Engine = apply (dailyKey, new BasicLampboard (), new DummyKeyboard)
+  def apply (dailyKey: DailyKey): Engine = apply (dailyKey, new DummyLampboard (), new DummyKeyboard)
 
   def apply (dailyKey: DailyKey, lampboard: Lampboard, keyboard: Keyboard): Engine = {
     val plugboard: Plugboard = Plugboard (dailyKey.pluggedPairs)
